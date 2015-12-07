@@ -1,0 +1,10 @@
+import tester.* ;
+  
+class Main {
+  static Examples E = new Examples () ;
+  static BankingSystem
+  
+  public static void main(String[] args) {
+    //Tester.runReport (E, false, false) ;
+  }
+}

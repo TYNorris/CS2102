@@ -1,0 +1,57 @@
+import java.util.LinkedList;
+
+import tester.*;
+
+class DataSmoothExamples {
+  IDataSmoothProbs D;
+  PHR domingo = new PHR("Domingo",5, 750,100); // obese
+  PHR cam = new PHR("Cam",2, 74, 130); //healthy
+  PHR shaun = new PHR("Shaun", 2, 100,100); // over
+  PHR meghan = new PHR("Meghan", 1, 18.4,160); //under
+  PHR cj = new PHR("CJ", 2.2, 100,100); //healthy
+
+  LinkedList<PHR> gi = new LinkedList<PHR>();
+    
+  DataSmoothExamples(IDataSmoothProbs D) {
+    this.D = D;
+
+    
+    gi.add(domingo);
+    gi.add(cam);
+    gi.add(shaun);
+    gi.add(meghan);
+    gi.add(cj);
+  }
+  
+  boolean testLongerList (Tester t) {
+	 LinkedList<Double> expectedOutput = new LinkedList<Double>();
+	 expectedOutput.add(100.0);
+	 expectedOutput.add(110.0);
+	 expectedOutput.add(130.0);
+	 expectedOutput.add(120.0);
+	 expectedOutput.add(100.0);
+	 	 
+    return t.checkExpect(D.dataSmooth(gi), expectedOutput);
+  }
+  
+  boolean testOnlyTwoValues(Tester t){
+	  LinkedList<PHR> giExecs = new LinkedList<PHR>();
+	  giExecs.add(domingo);
+	  giExecs.add(cam);
+	  
+	  LinkedList<Double> expectedOutput = new LinkedList<Double>();
+		 expectedOutput.add(100.0);
+		 expectedOutput.add(130.0);
+	  return t.checkExpect(D.dataSmooth(giExecs),expectedOutput);
+	  }
+  
+  boolean testOnlyOneDataPoint(Tester t){
+	  LinkedList<PHR> giGrads = new LinkedList<PHR>();
+	  giGrads.add(cj);
+	  LinkedList<Double> expectedOutput = new LinkedList<Double>();
+	  expectedOutput.add(100.0);
+	  
+	  return t.checkExpect(D.dataSmooth(giGrads), expectedOutput);
+  }
+  
+}

@@ -1,0 +1,11 @@
+1) Using your definitions, can someone create a match in which a Rugby team competes against a Robotics team and the scores are for another kind of contest entirely?
+
+	Yes, but the results may not make sense.
+
+2) What about your code either allows or prevents this weird match?
+
+	 Because the winner() method in Match calls the winner() method in each IResult, and returns a IContestant, each field could contain any object of those two Interfaces respectively. However, since the result has no reference to either contestant, the values would be entirely arbitrary.
+
+3) If your code does not prevent this, could it? How?
+
+	One option would be to create multiple constructors that only allow the creation of objects with all Rugby or all Robotics things.

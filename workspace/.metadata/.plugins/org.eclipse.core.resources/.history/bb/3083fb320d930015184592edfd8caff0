@@ -1,0 +1,25 @@
+import java.util.LinkedList;
+
+class Earthquake2 implements IEarthquakeProbs {
+  Earthquake2(){}
+  
+  public LinkedList<MaxHzReport> dailyMaxForMonth(LinkedList<Double> data,
+                                                  int month) {
+	  LinkedList<MaxHzReport> output = new LinkedList<MaxHzReport>();
+	  for(int i = 0; i<data.size(); i++){
+			  if(data.get(i)>100000){ //data is a date
+				  if((data.get(i)).intValue()%(month*100)<31){ //date is in this month
+					  MaxHzReport report = new MaxHzReport((data.get(i)).intValue()%(month*100), 0.0);
+					  while(data.get(i)<500){
+						  if(data.get(i)>report.maxReading)
+							  report.maxReading=data.get(i);
+						  i++;
+					  }
+					  output.add(report);				  }
+			  }
+	  }
+    return output;
+  }
+  
+
+}  

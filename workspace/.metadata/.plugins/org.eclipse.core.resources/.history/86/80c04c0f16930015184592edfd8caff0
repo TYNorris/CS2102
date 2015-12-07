@@ -1,0 +1,31 @@
+import tester.*;
+import java.util.LinkedList;
+
+class EarthquakeExamples {
+  IEarthquakeProbs E;
+  LinkedList<Double> givenData = new LinkedList<Double>();
+ 
+  EarthquakeExamples(IEarthquakeProbs E) {
+    this.E = E;
+    givenData.add(20151004.);
+    givenData.add(200.);
+    givenData.add(150.);
+    givenData.add(175.);
+    givenData.add(20151005.);
+    givenData.add(0.002);
+    givenData.add(0.03);
+    givenData.add(201510007.);
+    givenData.add(40.);
+    
+    
+  }
+  
+  boolean testGiven (Tester t) {
+	  LinkedList<MaxHzReport> expected = new LinkedList<MaxHzReport>();
+	  expected.add(new MaxHzReport(4,200.));
+	  expected.add(new MaxHzReport(5,0.03));
+	  expected.add(new MaxHzReport(7,40.));
+    return t.checkExpect(E.dailyMaxForMonth(givenData,10), expected);
+  }
+}
+

@@ -1,0 +1,35 @@
+import java.util.Collections;
+import java.util.LinkedList;
+
+class Earthquake1 implements IEarthquakeProbs {
+  Earthquake1(){}
+  
+  public LinkedList<MaxHzReport> dailyMaxForMonth(LinkedList<Double> data,
+                                                  int month) {
+	  LinkedList<LinkedList<Double>> allDays = new LinkedList<LinkedList<Double>>();  //create a new list for all of the days of the month
+	  LinkedList<MaxHzReport> output = new LinkedList<MaxHzReport>();    //create a list to hold the output
+	  for(int i = 0; i<data.size(); i++){      //for every number in Data
+			  if(data.get(i)>500.){ 		//data is a date
+				  String thisDate = data.get(i).toString();
+				  System.out.print(thisDate + "  ");
+				  System.out.println(Integer.toString(month));
+				 if(thisDate.substring(4,6).equals(Integer.toString(month))){ 		//date is in this month
+				  MaxHzReport report = new MaxHzReport(Integer.parseInt(thisDate.substring(6)), 0.0);
+				  LinkedList<Double> thisDateFreqs = new LinkedList<Double>();
+				  while(data.get(i)<500){
+					  thisDateFreqs.add(data.get(i));
+					  i++;
+				  }
+				  output.add(report);
+				  allDays.add(thisDateFreqs);
+				  }
+			  }
+	 // }
+	 for(int i = 0; i<output.size()&&i<allDays.size();i++){  //find greatest 
+		Collections.sort(allDays.get(i));
+		output.get(i).maxReading = allDays.get(i).getFirst();
+	  }
+    return output;
+  }
+
+}  

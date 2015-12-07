@@ -1,0 +1,34 @@
+import java.util.*;
+
+class BMI1 implements IBMIProbs {
+	
+  BMI1(){}
+  
+  public BMISummary bmiReport(LinkedList<PHR> phrs) {
+	  
+	  LinkedList<String> under;
+	  LinkedList<String> healthy;
+	  LinkedList<String> over;
+	  LinkedList<String> obese;
+
+	  under = phrsInBMIRange(phrs, 0, 18.5);
+	  healthy = phrsInBMIRange(phrs,18.5,25);
+	  over = phrsInBMIRange(phrs,25,30);
+	  obese = phrsInBMIRange(phrs,30, Double.POSITIVE_INFINITY);
+	  
+	  BMISummary summary = new BMISummary(under,healthy,over,obese);
+	
+    return summary;
+  }
+  
+  private LinkedList<String> phrsInBMIRange(LinkedList<PHR> phrs, double lower, double upper){
+
+	  LinkedList<String> output = new LinkedList<String>();
+	  phrs.stream()
+	  	  .filter((PHR phr) -> phr.getBMI() <= upper && phr.getBMI() > lower)
+	  	  .map((PHR phr) -> phr.name)
+	  	  .forEach(phr -> output.add(phr));
+	  
+	  return output;
+  }
+}

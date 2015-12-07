@@ -1,0 +1,13 @@
+import tester.*;
+
+class BMIExamples {
+  IBMIProbs B;
+  
+  BMIExamples(IBMIProbs b) {
+    this.B = b;
+  }
+  
+  boolean testFoo (Tester t) {
+    return t.checkExpect(B.bmiReport(null), null);
+  }
+}

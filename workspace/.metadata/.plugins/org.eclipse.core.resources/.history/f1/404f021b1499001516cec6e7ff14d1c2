@@ -1,0 +1,17 @@
+import tester.* ;
+  
+class Main {
+  static Examples E = new Examples () ;
+  static BankingService B;
+  
+  public static void main(String[] args) {
+    //Tester.runReport (E, false, false) ;
+
+	  Customer gompeiCust = new Customer("gompei", 1865);
+	  CustSet allCusts = new CustSet();
+	  allCusts.addCust(gompeiCust);
+	  B = new BankingService(new AcctSet(), allCusts);
+	  B.loginScreen();
+  
+  }
+}

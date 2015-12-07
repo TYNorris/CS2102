@@ -1,0 +1,20 @@
+import tester.*;
+//************** Examples *************
+
+class Examples {
+Customer gompeiCust = new Customer("gompei", 1865);
+ 
+// method to initialize a banking service with Gompei as the customer
+public BankingService setUpGompei() {
+ CustSet allCusts = new CustSet();
+ allCusts.addCust(gompeiCust);
+ return new BankingService(new AcctSet(), allCusts);
+}
+
+
+// a simple test case that gompei can log in
+boolean testValidLogin(Tester t) {
+ return t.checkExpect(setUpGompei().login("Gompei", 150), gompeiCust);
+}
+
+}
