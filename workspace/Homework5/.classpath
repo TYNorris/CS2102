@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="/Users/travisnorris/Documents/_WPI/15-16 school/CS2102/EclipseJars/testerV1_3_5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
