@@ -8,24 +8,17 @@ public class Votes {
 	private HashMap<String,Integer> numFirstVotes = new HashMap<String,Integer>();
 	private HashMap<String,Integer> numSecondVotes = new HashMap<String,Integer>();
 	private HashMap<String,Integer> numThirdVotes = new HashMap<String,Integer>();
-	private boolean initialized = false;
 	
 	Votes(){
 		
 	}
 
 	public void processVote(String first, String second, String third) throws DuplicateVotesException,UnknownCandidateException {
-		if (initialized){
 			if (allValid(first,second,third)){
 					addVoteTo(numFirstVotes,first);
 					addVoteTo(numSecondVotes,second);
 					addVoteTo(numThirdVotes,third);
 			}
-		}
-		else{
-			init();
-			processVote(first,second,third);
-		}
 	}
 	
 	public void addCandidate(String cand) throws CandidateExistsException{
@@ -55,8 +48,12 @@ public class Votes {
 	public String findWinnerMostPoints(){
 		String currentWinner = "";
 		int mostPoints = 0;
+		System.out.println(numFirstVotes.toString());
+		System.out.println(numSecondVotes.toString());
+		System.out.println(numThirdVotes.toString());
 		for(String cand : candidates){
 			int currentPoints = getPoints(cand);
+			System.out.printf(" %s | %d %n",cand,currentPoints);
 			if (currentPoints > mostPoints){
 				currentWinner = cand;
 				mostPoints = currentPoints;
@@ -70,23 +67,14 @@ public class Votes {
 	}
 	//################ HELPER FUNCTIONS ###################
 	private void addVoteTo(HashMap<String,Integer> votes, String candidate){
-		votes.put(candidate,((Integer)numFirstVotes.get(candidate).intValue()+1));
+		votes.put(candidate,((Integer) (votes.get(candidate).intValue()+1)));
 	}
 	
-	private void init(){
-		if(!initialized){
-		for(String cand : candidates){
-			numFirstVotes.put(cand, new Integer(0));
-			numSecondVotes.put(cand, new Integer(0));
-			numThirdVotes.put(cand, new Integer(0));
-		}
-		initialized = true;
-		}
-	}
+
 	
 	private boolean allValid(String first, String second, String third) throws DuplicateVotesException,UnknownCandidateException {
 
-		if(!candidates.contains(first) && !candidates.contains(second) && !candidates.contains(third)){
+		if(!candidates.contains(first) || !candidates.contains(second) || !candidates.contains(third)){
 			if(!candidates.contains(first)){
 				throw new UnknownCandidateException(first);
 			}
@@ -112,7 +100,9 @@ public class Votes {
 	}
 	
 	private int getPoints(String cand){
-		return 3*numFirstVotes.get(cand).intValue() + 2*numSecondVotes.get(cand).intValue() + numThirdVotes.get(cand).intValue();
+		return (3*numFirstVotes.get(cand).intValue() 
+			  + 2*numSecondVotes.get(cand).intValue()
+			  + numThirdVotes.get(cand).intValue());
 	}
 	
 	

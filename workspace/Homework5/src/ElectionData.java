@@ -8,8 +8,6 @@ public class ElectionData {
 	  private Votes votes = new Votes();
 	  	  
 	  ElectionData() {
-	    addCandidate("Gompei");
-	    addCandidate("Husky");
 	  }
 	  
 	  void processVote(String first, String second, String third) throws DuplicateVotesException, UnknownCandidateException{
@@ -31,14 +29,9 @@ public class ElectionData {
 	  public String findWinnerMostPoints(){
 		  return votes.findWinnerMostPoints();
 	  }
-	  public void addCandidate(String cand){
-		try{
+	  public void addCandidate(String cand) throws CandidateExistsException {
 			ballot.add(cand);
 			votes.addCandidate(cand);
-		}
-		catch (CandidateExistsException e){
-			System.out.printf("Candidate %s already exists %n",e.name);
-		}
 	  }
 	  
 	  public void printBallot(){

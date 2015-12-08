@@ -24,7 +24,7 @@ public class VotingMachine {
 	    	screen();	
 	    }
 	    catch (UnknownCandidateException e){
-	    	System.out.printf("%s is not on the ballot. Try again.", e.name);
+	    	System.out.printf("%s is not on the ballot. Try again. %n", e.name);
 	    	screen();
 	    }
 	    System.out.println("Thank you for voting");
